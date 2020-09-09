@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 })
 const MainComponent = (props)=>{
-    console.log(props);
+  
     return(
         <HomePage search_github_user={props.search_github_user} searchUsername={props.searchUsername}/>
     );

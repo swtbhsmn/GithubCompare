@@ -1,5 +1,5 @@
 import * as ActionTypes from './actionTypes';
-import { baseUrl ,githubUrl} from '../shared/baseUrl';
+import { githubUrl} from '../shared/baseUrl';
 
 
 export const searchUsername = (username) => (dispatch) => {
