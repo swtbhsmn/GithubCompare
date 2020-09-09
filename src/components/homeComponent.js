@@ -1,7 +1,8 @@
-import React from 'react';
-import { Input, Card } from 'antd';
+import React,{useState} from 'react';
+import { Input, Card, Statistic, Row, Col } from 'antd';
 import '../App.css';
 import Loading from './loader';
+import { UserOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
 const RenderCard = ({ user, isLoading, errMess }) => {
@@ -24,18 +25,30 @@ const RenderCard = ({ user, isLoading, errMess }) => {
         console.log("loading end");
         return (<div className="flex-card">
 
-            {user.sort((a, b) => a.id > b.id ? 1 : -1).map((data, key) => {
+            {user.sort((a, b) => a.followers < b.followers ? 1 : -1).map((data, key) => {
                 return (
 
                     <div key={key} style={{ paddingBottom: "20px" }}>
-                        <Card title={data.login} bordered={true} style={{ width: 300 }}>
-                            <p>Name: {data.name}</p>
-                            <p>Followers: {data.followers}</p>
-                            <p>Following: {data.following}</p>
-                            <p>Public Gists: {data.public_gists}</p>
-                            <p>Public Repo: {data.public_repos}</p>
+                        <Card title={data.login} extra={<b>{data.name}</b>} bordered={true} style={{ width: 300 }}>
+                                  
 
+                            <Row gutter={16}>
 
+                            <Col span={12}>
+                                    <Statistic title="Public Repos" value={data.public_repos} prefix={<UserOutlined />} />
+                                </Col>
+                                 <Col span={12}>
+                                    <Statistic title="Public gists" value={data.public_gists} prefix={<UserOutlined />} />
+                                </Col>
+                                <Col span={12}>
+                                    <Statistic title="Followers" value={data.followers} prefix={<UserOutlined />} />
+
+                                </Col>
+                                <Col span={12}>
+                                    <Statistic title="Following" value={data.following} prefix={<UserOutlined />} />
+                                </Col>
+                            </Row>
+                               
                         </Card>
                     </div>
                 );
@@ -47,6 +60,8 @@ const RenderCard = ({ user, isLoading, errMess }) => {
 
 
 const HomePage = (props) => {
+
+    
 
     const checkUser = (value) => {
 
@@ -77,7 +92,7 @@ const HomePage = (props) => {
                 </div>
 
             </div>
-            <div >
+            <div className="result-box" >
 
                 <RenderCard user={props.search_github_user.github_user}
                     isLoading={props.search_github_user.isLoading}
