@@ -1,0 +1,4 @@
+export const ADD_USERS = 'ADD_USERS';
+export const SEARCH_USERNAME = 'SEARCH_USERNAME';
+export const ADD_USER = 'ADD_USER';
+export const SEARCH_USERNAME_FAILED = 'SEARCH_USERNAME_FAILED';
