@@ -4,7 +4,7 @@ import { githubUrl} from '../shared/baseUrl';
 
 export const searchUsername = (username) => (dispatch) => {
 
-   
+   dispatch(doLoading(true));
     return fetch(githubUrl +username, {
         method: "GET",
         headers: {
@@ -37,4 +37,8 @@ export const addUsername= (user) => ({
 export const searchFailed = (errmess) => ({
     type: ActionTypes.SEARCH_USERNAME_FAILED,
     payload: errmess
+});
+
+export const doLoading = () => ({
+    type: ActionTypes.DO_LOADING
 });

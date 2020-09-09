@@ -11,8 +11,11 @@
 }
 
 .btn-color{
+
+    
     background-color: rgb(196, 196, 209);
     cursor: pointer;
+
 }
 
 .flex-card{
@@ -20,4 +23,9 @@
     align-items: center;
     flex-flow: row wrap;
     justify-content: space-evenly;
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
