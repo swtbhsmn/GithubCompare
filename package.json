@@ -2,7 +2,7 @@
   "name": "githubcompare",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://swtbhsmn.github.io/GithubCompare/",
+  "homepage":"https://swtbhsmn.github.io/GithubCompare",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",
