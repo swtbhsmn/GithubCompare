@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+//import logger from 'redux-logger';
 import {search_github_user } from './searchUsername';
 
 const ConfigureStore = () => {
@@ -10,7 +10,7 @@ const ConfigureStore = () => {
         fetchUsername:search_github_user,
     
         }),
-        applyMiddleware(thunk,logger)
+        applyMiddleware(thunk)
     );
 
     return store;
