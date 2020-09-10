@@ -23,7 +23,7 @@ const MainComponent = (props) => {
 
         <Switch>
 
-            <Route path='/home' component={(() => { return (
+            <Route  path='/home' component={(() => { return (
                                                     <HomePage search_github_user={props.search_github_user} 
                                                     searchUsername={props.searchUsername} />
                                                     

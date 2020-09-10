@@ -128,7 +128,7 @@ const HomePage = (props) => {
             </div>
           
 
-            <div className="result-box" >
+            
 
                 <div className="box-container">
 
@@ -137,7 +137,7 @@ const HomePage = (props) => {
 
                     />
 
-                </div>
+            
             </div>
 
         </div>
