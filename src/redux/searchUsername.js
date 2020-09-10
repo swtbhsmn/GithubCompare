@@ -10,7 +10,7 @@ export const search_github_user = (state = { isLoading:false,errMess: null, gith
           var user = action.payload;
           return { ...state,isLoading:false,errMess:null,github_user:state.github_user.concat(user)};
       case ActionTypes.DO_LOADING:
-          return {...state,isLoading:true,errMess:null}
+          return {...state,isLoading:true,errMess:null};
       default:
         return state;
     }

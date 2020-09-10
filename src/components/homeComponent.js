@@ -1,67 +1,79 @@
-import React,{useState} from 'react';
-import { Input, Card, Statistic, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import { Input, Card, Statistic, Row, Col, Select } from 'antd';
 import '../App.css';
 import Loading from './loader';
-import { UserOutlined } from '@ant-design/icons';
 const { Search } = Input;
+const { Option } = Select;
 
-const RenderCard = ({ user, isLoading, errMess }) => {
+
+const RenderLoading = ({ isLoading, errMess }) => {
 
     if (isLoading) {
-        console.log('loading');
         return (<Loading />);
     }
     else if (errMess) {
         return (
             <div className="flex-card">
-                <p>{errMess}</p>
+               {errMess}
+
             </div>
-
-
 
         );
     }
     else {
-        console.log("loading end");
-        return (<div className="flex-card">
+        return <div style={{display:"none"}}></div>;
+    }
 
-            {user.sort((a, b) => a.followers < b.followers ? 1 : -1).map((data, key) => {
-                return (
+}
 
-                    <div key={key} style={{ paddingBottom: "20px" }}>
-                        <Card title={data.login} extra={<b>{data.name}</b>} bordered={true} style={{ width: 300 }}>
-                                  
+const RenderCard = ({ user, state }) => {
 
-                            <Row gutter={16}>
+
+    return (<div className="flex-card">
+
+        {user.sort((a, b) => a[state.value] < b[state.value] ? 1 : -1).map((data, key) => {
+            return (
+
+                <div key={key} className="inside-map-render">
+                    <Card title={data.login} extra={<b>{data.name}</b>} bordered={true} style={{ width: 300 }}>
+
+
+                        <Row gutter={16}>
 
                             <Col span={12}>
-                                    <Statistic title="Public Repos" value={data.public_repos} prefix={<UserOutlined />} />
-                                </Col>
-                                 <Col span={12}>
-                                    <Statistic title="Public gists" value={data.public_gists} prefix={<UserOutlined />} />
-                                </Col>
-                                <Col span={12}>
-                                    <Statistic title="Followers" value={data.followers} prefix={<UserOutlined />} />
+                                <Statistic title="Public Repos" value={data.public_repos} />
+                            </Col>
+                            <Col span={12}>
+                                <Statistic title="Public gists" value={data.public_gists} />
+                            </Col>
+                            <Col span={12}>
+                                <Statistic title="Followers" value={data.followers} />
 
-                                </Col>
-                                <Col span={12}>
-                                    <Statistic title="Following" value={data.following} prefix={<UserOutlined />} />
-                                </Col>
-                            </Row>
-                               
-                        </Card>
-                    </div>
-                );
-            })}
-        </div>);
-    }
+                            </Col>
+                            <Col span={12}>
+                                <Statistic title="Following" value={data.following} />
+                            </Col>
+                        </Row>
+
+                    </Card>
+                </div>
+            );
+        })}
+    </div>);
+
 }
 
 
 
 const HomePage = (props) => {
 
-    
+
+    const [state, setState] = useState({
+        value: "followers",
+        visible: true
+    })
+
+  
 
     const checkUser = (value) => {
 
@@ -76,28 +88,56 @@ const HomePage = (props) => {
 
     }
 
+    const selectValue = (value) => {
+        console.log(value);
+        setState({ value: value })
+    }
+
 
     return (
 
-        <div>
+        <div className="body-container">
 
             <div className="search_box">
                 <div className="tittle">
                     <h2>GithubCompare!</h2>
                 </div>
-                <div style={{ display: "flex", marginBottom: "100px", width: '320px' }}>
+                <div style={{ display: "flex", marginBottom: "20px", width: '320px' }}>
 
                     <Search size="large" placeholder="input search text" onSearch={value => checkUser(value)} enterButton />
 
                 </div>
+                <div>
+                    <Select defaultValue={state.value} style={{ width: '320px' }} onChange={selectValue} >
+
+                        <Option value="followers">Followers</Option>
+                        <Option value="following">Following</Option>
+                        <Option value="public_gists" >Public gists</Option>
+                        <Option value="public_repos">Public repos</Option>
+
+                    </Select>
+                </div>
+                <div style={{ marginTop: "20px" }}>
+
+                    <RenderLoading 
+                        isLoading={props.search_github_user.isLoading}
+                        errMess={props.search_github_user.errMess}
+                    />
+                </div>
 
             </div>
+          
+
             <div className="result-box" >
 
-                <RenderCard user={props.search_github_user.github_user}
-                    isLoading={props.search_github_user.isLoading}
-                    errMess={props.search_github_user.errMess}
-                />
+                <div className="box-container">
+
+                    <RenderCard user={props.search_github_user.github_user}
+                        state={state}
+
+                    />
+
+                </div>
             </div>
 
         </div>
