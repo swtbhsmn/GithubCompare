@@ -10,7 +10,11 @@ This is link where this project is hosted:
         
         if you want to visit user profile then just click on the user card
         then their profile open in new tab.
-        
+This is link about:
+        https://github-user-compare.herokuapp.com
+
+        whatever, change made in this project and git push to github
+        then this url get reflected instantly.
 Run 
         npm start
          http://localhost:3000
