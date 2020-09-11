@@ -30,16 +30,16 @@ const RenderCard = ({ user, state }) => {
 
 
     return (<div className="flex-card">
-        <div style={{ top: 0, right: 0, position:"absolute", padding: 20 }}>
+        <div style={{ top: 0, right: 0, position: "absolute", padding: 20 }}>
 
-          
-            
-                    <Statistic value={user.length} />
-          
 
-       
+
+            <Statistic value={user.length} />
+
+
+
         </div>
-        {user.sort((a, b) => a[state.value] < b[state.value] ? 1 : -1).map((data, key) => {
+        {user.sort((a, b) => a[state] < b[state] ? 1 : -1).map((data, key) => {
             return (
 
                 <div key={key} className="inside-map-render" >
@@ -78,11 +78,8 @@ const RenderCard = ({ user, state }) => {
 const HomePage = (props) => {
 
 
-    const [state, setState] = useState({
-        value: "followers",
-        visible: true
-    })
 
+    const [state, setState] = useState(window.sessionStorage.getItem("selectValue"));
 
 
     const checkUser = (value) => {
@@ -99,8 +96,8 @@ const HomePage = (props) => {
     }
 
     const selectValue = (value) => {
-
-        setState({ value: value })
+        window.sessionStorage.setItem("selectValue", value);
+        setState(value);
     }
 
 
@@ -114,11 +111,11 @@ const HomePage = (props) => {
                 </div>
                 <div style={{ display: "flex", marginBottom: "20px", width: '320px' }}>
 
-                    <Search size="large" placeholder="Enter Github Username" onSearch={value =>!value?false: checkUser(value)} enterButton />
+                    <Search size="large" placeholder="Enter Github Username" onSearch={value => !value ? false : checkUser(value)} enterButton />
 
                 </div>
                 <div>
-                    <Select placeholder="First search username then select" style={{ width: '320px' }} onChange={selectValue} >
+                    <Select defaultValue={state} placeholder="Select for ranked" style={{ width: '320px' }} onChange={selectValue} >
 
                         <Option value="followers">Followers</Option>
                         <Option value="following">Following</Option>
